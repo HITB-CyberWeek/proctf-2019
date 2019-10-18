@@ -78,16 +78,15 @@ Listen to music:
 
 ### Vulns
 
-##### Path traversal & insecure m3u file parsing
+##### Path traversal & insecure *.m3u file parsing
 While music parsing and creating image we combine mp3 tags: Artist, Album and track. There is no filtering.
 So, you could bypass it into `Path.Combine` and create png file in other path.  
 ```using (var imgFs = CreateFileStream(Path.Combine(Constants.ImagesPaths, value + ".png")))```  
 https://github.com/HackerDom/proctf-2019/blob/master/services/dotFM/uploader/Uploader/Storages/Storage.cs#L45  
 Surprisingly, if you store text in the image tags, service can parse image as a playlist.  
 
-##### *.m3u file injection
-Main logic is in searching <sha1>.mp3.  
-Playlist always has full hash string, but the search is performed by file prefixes.  
+##### serach injection.  
+Playlist always has full file path, but the fetching from filesystem is performed by file prefixes.  
 ```get_files_lookup("music", f"{result['tracks'][circuited_number]}.mp3"```  
 https://github.com/HackerDom/proctf-2019/blob/master/services/dotFM/front/main.py#L117  
 So, you could list all files by injecting a playlist of short hex-number prefixes.  
