@@ -72,9 +72,9 @@ Let's look a bit more attentively:
 Main workflows are:
 
 Create playlist:  
-`POST /channel (frontend) -> POST /playlist (backend) -> store file in FS`  
+`POST /channel (frontend) -> POST /playlist (backend) -> stores file in FS`  
 Listen to music:  
-`GET /channel (frontend) -> GET /playlist (backend) -> fetch files from frontend`  
+`GET /channel (frontend) -> GET /playlist (backend) -> fetches files paths from backend and reads them by frontend; then, frontend sends the first found file`  
 
 ### Vulns
 
